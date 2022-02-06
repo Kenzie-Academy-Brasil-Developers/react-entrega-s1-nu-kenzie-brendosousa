@@ -1,0 +1,13 @@
+.user-page {
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 850px) {
+  .user-page {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

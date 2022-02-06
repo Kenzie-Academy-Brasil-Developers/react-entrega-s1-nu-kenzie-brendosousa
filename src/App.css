@@ -1,0 +1,97 @@
+.App {
+  text-align: center;
+  background-color: #212529;
+  color: white;
+}
+
+.Top {
+  display: flex;
+  flex-direction: column;
+}
+
+.Top .logo {
+  padding-top: 20px;
+}
+
+.Top h2 {
+  margin: 33px 0px 10px 20px;
+  font-size: 19px;
+  font-weight: 800;
+  text-align: left;
+  font-family: "Nunito", sans-serif;
+  width: 80%;
+}
+
+.Top p {
+  margin: 10px 0px 50px 20px;
+  text-align: left;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.Top button {
+  background-color: #fd377e;
+  color: white;
+  width: 100px;
+  height: 48px;
+  border: 2px solid #fd377e;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 14px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.back {
+  padding-top: 70px;
+  padding-bottom: 14px;
+}
+
+.back img {
+  width: 85%;
+  max-width: 298px;
+}
+
+@media (min-width: 850px) {
+  .Top {
+    width: 55%;
+    height: 593px;
+    flex-wrap: wrap;
+    padding-bottom: 46px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 70px;
+  }
+
+  .Top h2 {
+    margin-left: 0px;
+    font-size: 38px;
+    width: 50%;
+  }
+
+  .Top p {
+    margin-left: 0px;
+  }
+
+  .Top button {
+    width: 241px;
+    height: 48px;
+    margin-left: 0px;
+  }
+
+  .back {
+    width: 90%;
+    height: 593px;
+    display: flex;
+    justify-content: center;
+    margin-left: 15%;
+  }
+
+  .back img {
+    max-width: 100%;
+  }
+}
