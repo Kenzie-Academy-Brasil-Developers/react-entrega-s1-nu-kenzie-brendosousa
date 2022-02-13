@@ -1,11 +1,23 @@
 import "./styles.css";
 
 const TotalMoney = ({ listTransactions }) => {
-  //através de um reduce, fará a somatória dos valores de todas as transações.
+  const entries = listTransactions.filter((item) => {
+    return item.type === "Entrada";
+  });
 
-  const totalPrice = listTransactions.reduce((acum, actual) => {
+  const expenses = listTransactions.filter((item) => {
+    return item.type === "Despesa";
+  });
+
+  const totalPriceEntries = entries.reduce((acum, actual) => {
     return Number(actual.value) + acum;
   }, 0);
+
+  const totalPriceExpenses = expenses.reduce((acum, actual) => {
+    return Number(actual.value) + acum;
+  }, 0);
+
+  const totalPrice = totalPriceEntries - totalPriceExpenses;
 
   return (
     <div className="boxTotal">

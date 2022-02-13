@@ -1,14 +1,18 @@
 import { useState } from "react";
 import "./styles.css";
+import toast, { Toaster } from "react-hot-toast";
 
 const Form = ({ listTransactions, setListTransactions }) => {
-  const [descricao, setDescricao] = useState("");
-  const [valor, setValor] = useState("");
-  const [tipo, setTipo] = useState("");
+  const [description, setDescription] = useState("");
+  const [value, setValue] = useState("");
+  const [type, setType] = useState("Entrada");
 
   const prev = (e) => {
     e.preventDefault();
   };
+
+  const notify = () =>
+    toast.error("Os campos de descrição e valor devem ser preenchidos");
 
   return (
     <form onSubmit={prev} className="form">
@@ -17,8 +21,8 @@ const Form = ({ listTransactions, setListTransactions }) => {
         <input
           placeholder="Digite aqui sua descrição"
           type="text"
-          value={descricao}
-          onChange={(event) => setDescricao(event.target.value)}
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
         />
         <p>Ex: Compra de roupas</p>
       </label>
@@ -29,8 +33,8 @@ const Form = ({ listTransactions, setListTransactions }) => {
           <input
             type="number"
             placeholder="1         R$"
-            value={valor}
-            onChange={(event) => setValor(event.target.value)}
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
           />
         </label>
 
@@ -39,8 +43,8 @@ const Form = ({ listTransactions, setListTransactions }) => {
           <select
             name="type"
             id="type"
-            value={tipo}
-            onChange={(event) => setTipo(event.target.value)}
+            value={type}
+            onChange={(event) => setType(event.target.value)}
           >
             <option value="Entrada">Entrada</option>
             <option value="Despesa">Despesa</option>
@@ -50,20 +54,21 @@ const Form = ({ listTransactions, setListTransactions }) => {
 
       <button
         onClick={() =>
-          descricao && valor > 0
+          description && value > 0
             ? setListTransactions([
                 ...listTransactions,
                 {
-                  description: descricao,
-                  value: valor,
-                  type: tipo,
+                  description: description,
+                  value: value,
+                  type: type,
                 },
               ])
-            : alert("Os campos de descrição e valor devem ser preenchidos")
+            : notify()
         }
       >
         Inserir valor
       </button>
+      <Toaster />
     </form>
   );
 };

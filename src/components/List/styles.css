@@ -36,6 +36,11 @@
   cursor: pointer;
 }
 
+.buttons button:hover {
+  background-color: #868e96;
+  color: white;
+}
+
 #todos {
   background: #fd377e;
   color: #ffffff;

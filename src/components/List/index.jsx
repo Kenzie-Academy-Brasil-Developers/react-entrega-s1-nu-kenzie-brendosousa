@@ -1,45 +1,43 @@
 import Card from "../Card";
 import image from "./img/NoCard.svg";
-import { useState } from "react";
 import "./styles.css";
 
-const List = ({ listTransactions, setListTransactions }) => {
-  const [showEntradas, setShowEntradas] = useState(false);
-
-  const [showDespesas, setShowDespesas] = useState(false);
-
-  const showAll = () => {
-    const list = document.querySelector(".list");
-    list.style.display = "initial";
-    setShowEntradas(false);
-    document.querySelector(".entradas").style.display = "none";
-    document.querySelector(".despesas").style.display = "none";
-  };
-
-  const openEntradas = () => {
-    setShowEntradas(true);
-    document.querySelector(".list").style.display = "none";
-    document.querySelector(".despesas").style.display = "none";
-    document.querySelector(".entradas").style.display = "initial";
-  };
-
-  const openDespesas = () => {
-    setShowDespesas(true);
-    document.querySelector(".list").style.display = "none";
-    document.querySelector(".entradas").style.display = "none";
-    document.querySelector(".despesas").style.display = "initial";
-  };
-
+const List = ({
+  listTransactions,
+  setListTransactions,
+  listEntries,
+  listExpenses,
+}) => {
   return (
     <div className="resume">
       <div className="menu">
         <p>Resumo financeiro</p>
         <div className="buttons">
-          <button id="todos" onClick={showAll}>
+          <button
+            id="todos"
+            onClick={() => {
+              listEntries(false);
+              listExpenses(false);
+            }}
+          >
             Todos
           </button>
-          <button onClick={openEntradas}>Entradas</button>
-          <button onClick={openDespesas}>Despesas</button>
+          <button
+            onClick={() => {
+              listEntries(true);
+              listExpenses(false);
+            }}
+          >
+            Entradas
+          </button>
+          <button
+            onClick={() => {
+              listEntries(false);
+              listExpenses(true);
+            }}
+          >
+            Despesas
+          </button>
         </div>
       </div>
       <div className="emptyList">
@@ -63,36 +61,6 @@ const List = ({ listTransactions, setListTransactions }) => {
             ))}
           </ul>
         )}
-
-        {showEntradas ? (
-          <ul className="entradas">
-            {listTransactions.map((transaction, index) =>
-              transaction.type === "Entrada" ? (
-                <Card
-                  transaction={transaction}
-                  listTransactions={listTransactions}
-                  setListTransactions={setListTransactions}
-                  key={index}
-                />
-              ) : null
-            )}
-          </ul>
-        ) : null}
-
-        {showDespesas ? (
-          <ul className="despesas">
-            {listTransactions.map((transaction, index) =>
-              transaction.type === "Despesa" ? (
-                <Card
-                  transaction={transaction}
-                  listTransactions={listTransactions}
-                  setListTransactions={setListTransactions}
-                  key={index}
-                />
-              ) : null
-            )}
-          </ul>
-        ) : null}
       </div>
     </div>
   );

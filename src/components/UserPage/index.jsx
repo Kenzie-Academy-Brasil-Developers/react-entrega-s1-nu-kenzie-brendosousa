@@ -2,27 +2,39 @@ import Header from "./..//Header";
 import Form from "./..//Form";
 import List from "./../List";
 import TotalMoney from "./../TotalMoney";
-import Card from "../Card";
 import { useState } from "react";
 import "./styles.css";
 
-const UserPage = () => {
+const UserPage = ({ showPage, setShowPage }) => {
   const [listTransactions, setListTransactions] = useState([]);
 
-  const filtredEntradas = () => {
-    const filtred = listTransactions.filter((item) => {
-      return item.type === "Entrada";
-    });
-    setListTransactions([...filtred]);
+  const [entries, setEntries] = useState([]);
+  const [expenses, setExpenses] = useState([]);
+
+  const [showEntries, setShowEntries] = useState(false);
+  const [showExpenses, setShowExpenses] = useState(false);
+
+  const listEntries = (isSet) => {
+    setEntries(
+      listTransactions.filter((item) => {
+        return item.type === "Entrada";
+      })
+    );
+    setShowEntries(isSet);
   };
 
-  const filtredDespesas = listTransactions.filter((item) => {
-    return item.type === "Despesa";
-  });
+  const listExpenses = (isSet) => {
+    setExpenses(
+      listTransactions.filter((item) => {
+        return item.type === "Despesa";
+      })
+    );
+    setShowExpenses(isSet);
+  };
 
   return (
     <div className="user-page">
-      <Header />
+      <Header showPage={showPage} setShowPage={setShowPage} />
 
       <Form
         listTransactions={listTransactions}
@@ -33,12 +45,31 @@ const UserPage = () => {
         <TotalMoney listTransactions={listTransactions} />
       ) : null}
 
-      <List
-        listTransactions={listTransactions}
-        setListTransactions={setListTransactions}
-        className="lista"
-      />
-      {console.log(listTransactions)}
+      {showEntries ? (
+        <List
+          listTransactions={entries}
+          setListTransactions={setEntries}
+          listEntries={listEntries}
+          listExpenses={listExpenses}
+          className="lista"
+        />
+      ) : showExpenses ? (
+        <List
+          listTransactions={expenses}
+          setListTransactions={setExpenses}
+          listEntries={listEntries}
+          listExpenses={listExpenses}
+          className="lista"
+        />
+      ) : (
+        <List
+          listTransactions={listTransactions}
+          setListTransactions={setListTransactions}
+          listEntries={listEntries}
+          listExpenses={listExpenses}
+          className="lista"
+        />
+      )}
     </div>
   );
 };

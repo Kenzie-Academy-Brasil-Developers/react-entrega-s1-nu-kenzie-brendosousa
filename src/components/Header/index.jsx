@@ -1,7 +1,7 @@
 import "./styles.css";
 import Logo from "./img/NuKenzie.svg";
 
-const Header = () => {
+const Header = ({ showPage, setShowPage }) => {
   return (
     <header className="header">
       <figure>
@@ -10,8 +10,7 @@ const Header = () => {
       </figure>
       <button
         onClick={() => {
-          document.querySelector(".Top").style.display = "flex";
-          document.querySelector(".user-page").style.display = "none";
+          setShowPage(!showPage);
         }}
       >
         Inicio

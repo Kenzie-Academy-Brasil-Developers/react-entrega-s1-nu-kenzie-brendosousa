@@ -24,6 +24,11 @@
   cursor: pointer;
 }
 
+.header button:hover {
+  background-color: #868e96;
+  color: white;
+}
+
 @media (min-width: 850px) {
   .header {
     justify-content: space-around;
